@@ -79,7 +79,11 @@ class Session extends AbstractEventListener implements BlockingEventListenerInte
 
             // bind element occured in <features>
             if ('features' === $element->parentNode->localName) {
-                $this->blocking = true;
+                // hook that allow to connect to jabberd2 server
+                // this blocks the connection because does not receive
+                // whole answer...
+                // TODO: must be fixed!!!
+                //$this->blocking = true;
                 $this->getConnection()->send(sprintf(
                     '<iq type="set" id="%s"><session xmlns="urn:ietf:params:xml:ns:xmpp-session"/></iq>',
                     XML::generateId()
